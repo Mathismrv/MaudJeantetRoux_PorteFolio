@@ -11,7 +11,7 @@
         "id": "projet2",
         "title": "Grenouille",
         "folder": "Grenouille",
-        "cover": "1.png",
+        "cover": "6.png",
         "images": ["1.png", "2.png","3.png","4.png", "5.png", "6.png"],
         "youtube_id": "lKAJrijC5JQ"
     },
@@ -27,7 +27,7 @@
         "id": "projet4",
         "title": "Stop Motion",
         "folder": "Stop_Motion",
-        "cover": "1.png",
+        "cover": "titre_finale.png",
         "images": ["1.png", "2.png","3.jpg","4.jpg", "5.PNG", "6.PNG","7.PNG"],
         "youtube_id": "M_oCkA_kDuY"
     }
