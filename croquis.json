@@ -2,17 +2,17 @@
     {
         "id": "croquis",
         "title": "Croquis",
-        "folder": "image/croquis1",
-        "cover": "10.jpg",
-        "images": ["1.png", "2.png","3.png","4.png", "5.png", "6.png", "7.png","8.png","9.png", "10.png", "11.png","12.png"],
+        "folder": "croquis1",
+        "cover": "10.png",
+        "images": ["1.png", "2.png","3.png","4.png", "5.png", "6.png", "7.png","8.png","9.png", "10.png", "11.jpg","12.jpg"],
         "youtube_id": ""
     },
     {
-        "id": "croquis2",
-        "title": "Recherches Personnages",
+        "id": "croquisTrad",
+        "title": "Croquis Tradi",
         "folder": "croquis2",
-        "cover": "cover.jpg",
-        "images": ["char1.jpg", "char2.jpg"],
+        "cover": "1.jpg",
+        "images": ["1.png", "2.png","3.png","4.png", "5.png", "6.png", "7.png","8.png","9.png", "10.png", "11.jpg"],
         "youtube_id": ""
     }
 ]
