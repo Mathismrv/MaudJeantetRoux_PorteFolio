@@ -834,9 +834,16 @@ footer {
 
 /* Croquis Grid Specific Style */
 .croquis-grid-style {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller cards */
-    max-width: 800px; /* Limit width to keep them centered/grouped */
+    display: flex; /* Use flexbox for better centering of few items */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.croquis-grid-style .project-wrapper {
+    width: 180px; /* Fixed width for croquis cards */
 }
 
