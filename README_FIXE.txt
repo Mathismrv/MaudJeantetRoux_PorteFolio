@@ -19,11 +19,14 @@ POUR AJOUTER UN PROJET :
        "youtube_id": "ID_VIDEO_YOUTUBE" 
    }
    (Laissez "youtube_id" vide "" s'il n'y a pas de vidéo).
+   NOTE : L'ordre des images dans la liste ["photo1.jpg", "photo2.jpg"] détermine l'ordre d'affichage sur le site.
 
 POUR AJOUTER UNE ILLUSTRATION :
-1. Ajoutez l'image dans le dossier "image/".
-2. Ouvrez "illustrations.json".
-3. Ajoutez le chemin de l'image dans la liste (ex: "image/nouvelle_illustration.jpg").
+1. Ajoutez vos images dans le dossier "image/illustrations/".
+2. Double-cliquez sur le script "scan_illustrations.py".
+   Le script classe les images par ORDRE ALPHABÉTIQUE.
+   Astuce : Pour choisir l'ordre, numérotez vos fichiers (ex: "01_dessin.jpg", "02_croquis.jpg").
+   (Vous pouvez aussi modifier "illustrations.json" manuellement pour un ordre précis).
 
 POUR LANCER LE SITE :
 Il suffit d'ouvrir "index.html" dans votre navigateur.
