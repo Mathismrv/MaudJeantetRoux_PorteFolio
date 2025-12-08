@@ -21,6 +21,14 @@
         "folder": "La_Nature_Reprend_ses_Droits",
         "cover": "1.jpg",
         "images": ["1.png", "2.png","3.png","4(1).png", "5.png", "6.png","7.png", "8.png", "9.png","10.png"],
-        "youtube_id": "lKAJrijC5JQ"
+        "youtube_id": ""
+    },
+           {
+        "id": "projet4",
+        "title": "Stop Motion",
+        "folder": "Stop_Motion",
+        "cover": "1.jpg",
+        "images": ["1.png", "2.png","3.jpg","4.jpg", "5.PNG", "6.PNG","7.PNG"],
+        "youtube_id": ""
     }
 ]
