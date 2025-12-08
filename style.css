@@ -402,18 +402,19 @@ footer {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Masonry Layout for Illustrations - Grid Mode (Left to Right) */
+/* Masonry Layout for Illustrations - Flex Column Mode */
 .masonry-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    display: flex;
     gap: 1.5rem;
-    align-items: start; /* Align items to top to avoid stretching */
+    width: 100%;
 }
 
-@media (max-width: 768px) {
-    .masonry-grid {
-        grid-template-columns: 1fr;
-    }
+.masonry-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1;
+    min-width: 0; /* Prevent flex overflow issues */
 }
 
 .masonry-item {
@@ -423,6 +424,7 @@ footer {
     border-radius: 0;
     cursor: pointer;
     transition: transform 0.3s ease;
+    width: 100%;
 }
 
 .masonry-item:hover {
@@ -434,10 +436,6 @@ footer {
     height: auto; /* Keep original aspect ratio */
     display: block;
     border-radius: 4px;
-}
-
-.masonry-item:hover img {
-    transform: scale(1.02);
 }
 
 /* Project Grid Styles */

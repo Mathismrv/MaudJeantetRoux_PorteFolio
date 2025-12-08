@@ -158,21 +158,58 @@ async function loadIllustrations() {
     try {
         const response = await fetch('illustrations.json');
         const images = await response.json();
-        const grid = document.getElementById('illustrations-grid');
         
         window.illustrationImages = images;
+        renderMasonry();
 
-        images.forEach((imgUrl, index) => {
-            const item = document.createElement('div');
-            item.className = 'masonry-item';
-            item.onclick = () => openImage(index);
-            item.innerHTML = `<img src="${imgUrl}" alt="Illustration">`;
-            grid.appendChild(item);
+        // Re-render on resize
+        window.addEventListener('resize', () => {
+            // Debounce slightly
+            clearTimeout(window.masonryResizeTimer);
+            window.masonryResizeTimer = setTimeout(renderMasonry, 200);
         });
 
     } catch (error) {
         console.error('Error loading illustrations:', error);
     }
+}
+
+function renderMasonry() {
+    const grid = document.getElementById('illustrations-grid');
+    if (!grid) return;
+    
+    const images = window.illustrationImages || [];
+    if (images.length === 0) return;
+
+    // Determine number of columns based on screen width
+    const width = window.innerWidth;
+    let numCols = 1;
+    if (width >= 1200) numCols = 3;      // Large screens: 3 columns
+    else if (width >= 768) numCols = 2;  // Tablets: 2 columns
+    // Mobile: 1 column
+
+    grid.innerHTML = ''; // Clear existing content
+
+    // Create column containers
+    const columns = [];
+    for (let i = 0; i < numCols; i++) {
+        const col = document.createElement('div');
+        col.className = 'masonry-column';
+        columns.push(col);
+        grid.appendChild(col);
+    }
+
+    // Distribute images: Left to Right, then Down
+    // Image 1 -> Col 1, Image 2 -> Col 2, Image 3 -> Col 3, Image 4 -> Col 1...
+    images.forEach((imgUrl, index) => {
+        const item = document.createElement('div');
+        item.className = 'masonry-item';
+        item.onclick = () => openImage(index);
+        item.innerHTML = `<img src="${imgUrl}" alt="Illustration">`;
+        
+        // Append to the correct column
+        columns[index % numCols].appendChild(item);
+    });
 }
 
 // Illustration Modal Logic
