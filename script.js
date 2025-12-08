@@ -23,6 +23,7 @@ async function loadCroquis() {
         const grid = document.getElementById('croquis-grid');
 
         for (const item of croquis) {
+            item.isCroquis = true; // Mark as croquis for masonry layout
             const card = document.createElement('div');
             card.className = 'project-wrapper';
             card.id = `card-croquis-${item.id}`;
@@ -131,21 +132,37 @@ async function openProjectModal(projectId) {
 
     // Gallery
     if (project.images && project.images.length > 0) {
-        content += `<div class="project-detail-grid">`;
-        project.images.forEach(img => {
-            const imgPath = `image/${project.folder}/${img}`;
-            content += `
-                <div class="project-detail-item">
-                    <img src="${imgPath}" alt="${project.title}" style="width: 100%; display: block; cursor: pointer;" onclick="openLightbox('${imgPath}')">
-                </div>
-            `;
-        });
-        content += `</div>`;
+        if (project.isCroquis) {
+            // Use Masonry for Croquis
+            content += `<div id="modal-masonry-grid" class="masonry-grid" style="margin-top: 2rem;"></div>`;
+        } else {
+            // Use Standard Grid for other projects
+            content += `<div class="project-detail-grid">`;
+            project.images.forEach(img => {
+                const imgPath = `image/${project.folder}/${img}`;
+                content += `
+                    <div class="project-detail-item">
+                        <img src="${imgPath}" alt="${project.title}" style="width: 100%; display: block; cursor: pointer;" onclick="openLightbox('${imgPath}')">
+                    </div>
+                `;
+            });
+            content += `</div>`;
+        }
     }
 
     modalBody.innerHTML = content;
     modal.style.display = "block";
     document.body.style.overflow = "hidden";
+
+    // Initialize Masonry if needed
+    if (project.isCroquis && project.images && project.images.length > 0) {
+        const imagesWithPaths = project.images.map(img => `image/${project.folder}/${img}`);
+        const container = document.getElementById('modal-masonry-grid');
+        // Use a custom click handler for lightbox
+        renderMasonryGrid(container, imagesWithPaths, (index) => {
+            openLightbox(imagesWithPaths[index]);
+        });
+    }
 }
 
 function closeModal() {
@@ -160,13 +177,17 @@ async function loadIllustrations() {
         const images = await response.json();
         
         window.illustrationImages = images;
-        renderMasonry();
+        
+        const grid = document.getElementById('illustrations-grid');
+        renderMasonryGrid(grid, images, (index) => openImage(index));
 
         // Re-render on resize
         window.addEventListener('resize', () => {
             // Debounce slightly
             clearTimeout(window.masonryResizeTimer);
-            window.masonryResizeTimer = setTimeout(renderMasonry, 200);
+            window.masonryResizeTimer = setTimeout(() => {
+                renderMasonryGrid(grid, images, (index) => openImage(index));
+            }, 200);
         });
 
     } catch (error) {
@@ -174,12 +195,9 @@ async function loadIllustrations() {
     }
 }
 
-function renderMasonry() {
-    const grid = document.getElementById('illustrations-grid');
-    if (!grid) return;
-    
-    const images = window.illustrationImages || [];
-    if (images.length === 0) return;
+function renderMasonryGrid(container, images, clickHandler) {
+    if (!container) return;
+    if (!images || images.length === 0) return;
 
     // Determine number of columns based on screen width
     const width = window.innerWidth;
@@ -187,7 +205,7 @@ function renderMasonry() {
     if (width >= 768) numCols = 2;      // Desktop & Tablet: 2 columns (Larger images)
     // Mobile: 1 column
 
-    grid.innerHTML = ''; // Clear existing content
+    container.innerHTML = ''; // Clear existing content
 
     // Create column containers
     const columns = [];
@@ -195,20 +213,23 @@ function renderMasonry() {
         const col = document.createElement('div');
         col.className = 'masonry-column';
         columns.push(col);
-        grid.appendChild(col);
+        container.appendChild(col);
     }
 
     // Distribute images: Left to Right, then Down
-    // Image 1 -> Col 1, Image 2 -> Col 2, Image 3 -> Col 3, Image 4 -> Col 1...
     images.forEach((imgUrl, index) => {
         const item = document.createElement('div');
         item.className = 'masonry-item';
-        item.onclick = () => openImage(index);
-        item.innerHTML = `<img src="${imgUrl}" alt="Illustration">`;
+        item.onclick = () => clickHandler(index);
+        item.innerHTML = `<img src="${imgUrl}" alt="Image">`;
         
         // Append to the correct column
         columns[index % numCols].appendChild(item);
     });
+}
+
+function renderMasonry() {
+    // Deprecated, replaced by renderMasonryGrid
 }
 
 // Illustration Modal Logic
