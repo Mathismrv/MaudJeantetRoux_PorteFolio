@@ -11,8 +11,16 @@
         "id": "projet2",
         "title": "Grenouille",
         "folder": "Grenouille",
-        "cover": "cover.jpg",
+        "cover": "1.jpg",
         "images": ["1.png", "2.png","3.png","4.png", "5.png", "6.png"],
+        "youtube_id": "lKAJrijC5JQ"
+    },
+        {
+        "id": "projet3",
+        "title": "La Nature reprend ses Droits",
+        "folder": "La_Nature_Reprend_ses_Droits",
+        "cover": "1.jpg",
+        "images": ["1.png", "2.png","3.png","4(1).png", "5.png", "6.png","7.png", "8.png", "9.png","10.png"],
         "youtube_id": "lKAJrijC5JQ"
     }
 ]
