@@ -184,8 +184,7 @@ function renderMasonry() {
     // Determine number of columns based on screen width
     const width = window.innerWidth;
     let numCols = 1;
-    if (width >= 1200) numCols = 3;      // Large screens: 3 columns
-    else if (width >= 768) numCols = 2;  // Tablets: 2 columns
+    if (width >= 768) numCols = 2;      // Desktop & Tablet: 2 columns (Larger images)
     // Mobile: 1 column
 
     grid.innerHTML = ''; // Clear existing content
