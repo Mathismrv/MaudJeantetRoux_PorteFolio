@@ -11,12 +11,6 @@
     <!-- Header Image Section with Navigation inside -->
     <div class="header-image">
         <img src="image/Titre_page.gif" alt="Logo" class="header-gif">
-        <!-- Admin Link -->
-        {% if current_user.is_authenticated %}
-            <a href="{{ url_for('dashboard') }}" class="admin-btn" style="text-decoration: none;">Espace Propriétaire</a>
-        {% else %}
-            <a href="{{ url_for('login') }}" class="admin-btn" style="text-decoration: none;">Propriétaire</a>
-        {% endif %}
         <nav>
             <ul class="nav-links">
                 <li><a href="portfolio.html">Portfolio</a></li>

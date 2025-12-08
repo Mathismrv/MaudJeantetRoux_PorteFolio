@@ -1,0 +1,2 @@
+Ceci est la description du projet 1.
+Elle est chargée depuis un fichier texte.

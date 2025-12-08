@@ -10,15 +10,9 @@
 
     <div class="header-image">
         <img src="image/Titre_page.gif" alt="Logo" class="header-gif">
-        <!-- Admin Link -->
-        {% if current_user.is_authenticated %}
-            <a href="{{ url_for('dashboard') }}" class="admin-btn" style="text-decoration: none;">Espace Propriétaire</a>
-        {% else %}
-            <a href="{{ url_for('login') }}" class="admin-btn" style="text-decoration: none;">Propriétaire</a>
-        {% endif %}
         <nav>
             <ul class="nav-links">
-                <li><a href="home.html">Accueil</a></li>
+                <li><a href="index.html">Accueil</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="projets.html" style="color: var(--accent-color);">Projets</a></li>
                 <li><a href="illustrations.html">Illustrations</a></li>
@@ -32,50 +26,8 @@
             <h1>Projets</h1>
         </section>
 
-        <div class="project-grid">
-            
-            {% for project in projects %}
-            <!-- Project Card -->
-            <div class="project-wrapper" id="card-project-{{ project.id }}">
-                <h3 class="project-title-visible">{{ project.title }}</h3>
-                <div class="project-card" onclick="openModal('project-{{ project.id }}')">
-                    
-                    {# Logic to determine cover media (Video priority) #}
-                    {% set ns = namespace(cover_video=None) %}
-                    
-                    {# Check for video in medias #}
-                    {% if project.medias %}
-                        {% for media in project.medias %}
-                            {% if media.media_type == 'video' and ns.cover_video is none %}
-                                {% set ns.cover_video = media.url %}
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
-                    
-                    {# Check legacy image_url if it is a video #}
-                    {% if ns.cover_video is none and '/video/' in project.image_url %}
-                        {% set ns.cover_video = project.image_url %}
-                    {% endif %}
-
-                    {% if ns.cover_video %}
-                        {# If we have a video, use it. Use image_url as poster if it's an image #}
-                        <video src="{{ ns.cover_video }}" 
-                            {% if '/video/' not in project.image_url %} poster="{{ project.image_url }}" {% endif %}
-                            muted loop 
-                            onmouseover="this.play()" 
-                            onmouseout="this.pause();this.currentTime=0;this.load();" 
-                            ontimeupdate="if(this.currentTime > 5) this.currentTime = 0;"
-                            style="object-fit: cover; width: 100%; height: 100%;"></video>
-                    {% else %}
-                        <img src="{{ project.image_url }}" alt="{{ project.title }}">
-                    {% endif %}
-                    
-                    <div class="project-info">
-                        <h3 class="project-title">Voir le projet</h3>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+        <div class="project-grid" id="project-grid">
+            <!-- Projects will be loaded here by JS -->
         </div>
 
         <!-- Modal Structure -->
@@ -88,126 +40,17 @@
             </div>
         </div>
 
-        <!-- Hidden Content for Projects -->
-        <div style="display: none;">
-            {% for project in projects %}
-            <div id="project-{{ project.id }}-content">
-                <!-- Header: Title & Description & Featured Video -->
-                <div style="text-align: center; margin-bottom: 3rem;">
-                    <h2 style="font-family: var(--font-artistic); font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1rem; text-transform: uppercase;">{{ project.title }}</h2>
-                    
-                    <!-- Logic to find featured video (First video found) -->
-                    {% set ns = namespace(featured_video_id=None) %}
-                    {% if project.medias %}
-                        {% for media in project.medias %}
-                            {% if media.media_type == 'video' and ns.featured_video_id is none %}
-                                {% set ns.featured_video_id = media.id %}
-                                <div style="width: 100%; max-width: 900px; margin: 2rem auto;">
-                                    <video src="{{ media.url }}" controls style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></video>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                        {# Fallback for legacy data #}
-                        {% if '/video/' in project.image_url %}
-                             <div style="width: 100%; max-width: 900px; margin: 2rem auto;">
-                                <video src="{{ project.image_url }}" controls style="width: 100%; border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);"></video>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-
-                    <p style="color: #333; font-size: 1.1rem; max-width: 800px; margin: 0 auto; line-height: 1.8;">{{ project.description }}</p>
-                </div>
-                
-                <!-- Gallery / Process -->
-                {% if project.medias %}
-                    <div class="project-detail-grid">
-                        {% for media in project.medias %}
-                            {# Skip the featured video if we showed one #}
-                            {% if ns.featured_video_id != media.id %}
-                                <div class="project-detail-item">
-                                    {% if media.media_type == 'video' %}
-                                        <video src="{{ media.url }}" controls style="width: 100%; display: block;"></video>
-                                    {% else %}
-                                        <img src="{{ media.url }}" alt="{{ project.title }}" style="width: 100%; display: block; cursor: pointer;" onclick="openLightbox(this.src)">
-                                    {% endif %}
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {# Fallback for legacy data (if it was an image) #}
-                    {% if '/video/' not in project.image_url %}
-                        <div class="project-detail-grid">
-                            <div class="project-detail-item">
-                                <img src="{{ project.image_url }}" alt="{{ project.title }}" style="width: 100%; display: block; cursor: pointer;" onclick="openLightbox(this.src)">
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endif %}
-            </div>
-            {% endfor %}
-        </div>
-
         <!-- Lightbox Modal -->
         <div id="lightboxModal" class="modal" style="z-index: 3000; background-color: rgba(0,0,0,0.95);">
             <span class="close-btn" onclick="closeLightbox()" style="position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; z-index: 3001;">&times;</span>
             <img id="lightboxImage" style="margin: auto; display: block; max-width: 90%; max-height: 90vh; object-fit: contain;">
         </div>
-
-        <script>
-            // Function to open modal
-            function openModal(projectId) {
-                var modal = document.getElementById("projectModal");
-                var modalBody = document.getElementById("modalBody");
-                var content = document.getElementById(projectId + "-content").innerHTML;
-                
-                modalBody.innerHTML = content;
-                modal.style.display = "block";
-                document.body.style.overflow = "hidden"; // Prevent scrolling background
-            }
-
-            // Function to close modal
-            function closeModal() {
-                var modal = document.getElementById("projectModal");
-                modal.style.display = "none";
-                document.body.style.overflow = "auto"; // Restore scrolling
-            }
-
-            // Lightbox functions
-            function openLightbox(src) {
-                var modal = document.getElementById("lightboxModal");
-                var modalImg = document.getElementById("lightboxImage");
-                modal.style.display = "flex";
-                modal.style.alignItems = "center";
-                modal.style.justifyContent = "center";
-                modalImg.src = src;
-            }
-
-            function closeLightbox() {
-                var modal = document.getElementById("lightboxModal");
-                modal.style.display = "none";
-            }
-
-            // Close modal when clicking outside of it
-            window.onclick = function(event) {
-                var projectModal = document.getElementById("projectModal");
-                var lightboxModal = document.getElementById("lightboxModal");
-                
-                if (event.target == projectModal) {
-                    closeModal();
-                }
-                if (event.target == lightboxModal) {
-                    closeLightbox();
-                }
-            }
-        </script>
-    </main>
     </main>
 
     <footer>
         <p>&copy; 2025 Mon Portfolio. Tous droits réservés.</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>

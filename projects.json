@@ -1,0 +1,18 @@
+[
+    {
+        "id": "projet1",
+        "title": "Exemple Projet 1",
+        "folder": "projet1",
+        "cover": "cover.jpg",
+        "images": ["photo1.jpg", "photo2.jpg"],
+        "youtube_id": "jWlsPFq4fKA"
+    },
+    {
+        "id": "projet2",
+        "title": "Exemple Projet 2",
+        "folder": "projet2",
+        "cover": "cover.jpg",
+        "images": ["photo1.jpg"],
+        "youtube_id": ""
+    }
+]
