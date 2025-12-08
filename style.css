@@ -402,32 +402,39 @@ footer {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-/* Masonry Layout for Illustrations */
+/* Masonry Layout for Illustrations - Grid Mode (Left to Right) */
 .masonry-grid {
-    column-count: 2; /* 2 columns for larger images */
-    column-gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    align-items: start; /* Align items to top to avoid stretching */
 }
 
 @media (max-width: 768px) {
     .masonry-grid {
-        column-count: 1; /* 1 column on mobile/tablet */
+        grid-template-columns: 1fr;
     }
 }
 
 .masonry-item {
-    break-inside: avoid;
-    margin-bottom: 1.5rem;
-    background: transparent; /* No card background */
-    box-shadow: none; /* No shadow */
+    background: transparent;
+    box-shadow: none;
     padding: 0;
-    border-radius: 0; /* No rounded corners */
+    border-radius: 0;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.masonry-item:hover {
+    transform: scale(1.02);
 }
 
 .masonry-item img {
     width: 100%;
-    height: auto; /* Respect aspect ratio */
+    height: auto; /* Keep original aspect ratio */
     display: block;
+    border-radius: 4px;
+}
     border-radius: 0; /* No rounded corners */
     transition: transform 0.3s ease;
 }

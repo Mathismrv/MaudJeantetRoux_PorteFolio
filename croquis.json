@@ -1,10 +1,10 @@
 [
     {
-        "id": "croquis1",
-        "title": "Carnet de Croquis 1",
-        "folder": "croquis1",
-        "cover": "cover.jpg",
-        "images": ["scan1.jpg", "scan2.jpg"],
+        "id": "croquis",
+        "title": "Croquis",
+        "folder": "image/croquis1",
+        "cover": "10.jpg",
+        "images": ["1.png", "2.png","3.png","4.png", "5.png", "6.png", "7.png","8.png","9.png", "10.png", "11.png","12.png"],
         "youtube_id": ""
     },
     {
