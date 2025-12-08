@@ -26,13 +26,15 @@
             <h1>Mon Portfolio</h1>
         </section>
 
-        <div style="max-width: 1000px; margin: 0 auto; padding: 1rem;">
-            
-            <!-- Download Button Fixed Top-Left -->
-            <a href="portfolio.pdf" class="btn" download style="position: fixed; top: 20px; left: 20px; z-index: 9999; padding: 1rem 1.5rem; font-size: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        <!-- Sticky Download Button (Left aligned, sticks to top) -->
+        <div style="position: sticky; top: 20px; z-index: 100; padding-left: 20px; margin-bottom: 1rem; height: 0;">
+             <a href="portfolio.pdf" class="btn" download style="padding: 1rem 1.5rem; font-size: 1rem; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
                 Télécharger le Portfolio (PDF)
             </a>
+        </div>
 
+        <div style="max-width: 1000px; margin: 0 auto; padding: 1rem;">
+            
             <!-- Portfolio Images Container -->
             <div id="portfolio-container" style="display: flex; flex-direction: column; gap: 0; align-items: center;">
                 <!-- Images will be loaded here by script.js -->
