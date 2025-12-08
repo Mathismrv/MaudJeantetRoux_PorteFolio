@@ -761,23 +761,24 @@ footer {
 @media (max-width: 768px) {
     .header-image {
         height: auto;
-        min-height: 350px;
-        padding-top: 120px; /* Space for logo */
-        align-items: center; /* Center nav vertically if needed, or keep bottom */
+        min-height: 300px; /* Reduced height */
+        padding-top: 100px; /* Space for logo */
+        padding-bottom: 1rem;
+        align-items: center;
         flex-direction: column;
         justify-content: flex-end;
     }
 
     .header-gif {
-        width: 200px;
+        width: 200px; /* Smaller logo */
         top: 20px;
         left: 50%;
-        transform: translateX(-50%); /* Center logo */
+        transform: translateX(-50%);
     }
 
     nav {
         width: 100%;
-        padding: 1rem;
+        padding: 0.5rem;
     }
 
     .nav-links {
@@ -787,45 +788,56 @@ footer {
     }
 
     .nav-links a {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
         padding: 8px 12px;
         background-color: rgba(0, 0, 0, 0.5); /* Better contrast */
         border: 1px solid rgba(255,255,255,0.2);
         flex: 0 1 auto;
         text-align: center;
-        margin-bottom: 5px;
+        min-width: auto;
+        border-radius: 15px;
     }
-}
-
-
-/* --- Mobile Header Optimization --- */
-@media (max-width: 768px) {
-    .header-image {
-        height: auto;
-        min-height: 350px;
-        padding-top: 120px; /* Space for logo */
+    
+    /* Grids on Mobile */
+    .project-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 2rem;
     }
 
-    .header-gif {
-        width: 250px;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%); /* Center logo */
+    .masonry-grid {
+        flex-direction: column; /* Stack columns */
+        gap: 1rem;
+    }
+    
+    .croquis-grid-style .project-wrapper {
+        width: 45%; /* 2 items per row on mobile */
+        min-width: 140px;
+    }
+    
+    .croquis-grid-style {
+        gap: 15px;
     }
 
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.8rem;
+    /* Modal on Mobile */
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 1rem;
     }
-
-    .nav-links a {
-        font-size: 0.9rem;
-        padding: 8px 12px;
-        background-color: rgba(0, 0, 0, 0.4); /* Better contrast */
-        flex: 1 1 auto; /* Allow buttons to grow/shrink */
-        text-align: center;
-        min-width: 80px;
+    
+    .close-btn {
+        font-size: 35px;
+        padding: 10px;
+    }
+    
+    /* Typography */
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        padding: 0 1rem;
     }
 }
 
