@@ -27,14 +27,17 @@
         </section>
 
         <div style="max-width: 1000px; margin: 0 auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <!-- Portfolio Image -->
-            <div style="text-align: center; margin-bottom: 1rem;">
-                <img src="portfolio.png" alt="Portfolio Maud" style="width: 100%; height: auto; display: block;">
+            
+            <!-- Download Button at the top -->
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <a href="portfolio.pdf" class="btn" download style="padding: 1rem 2rem; font-size: 1.2rem;">Télécharger le Portfolio (PDF)</a>
+            </div>
+
+            <!-- Portfolio Images Container -->
+            <div id="portfolio-container" style="display: flex; flex-direction: column; gap: 0;">
+                <!-- Images will be loaded here by script.js -->
             </div>
             
-            <div style="text-align: center; margin-top: 1rem;">
-                <a href="portfolio.pdf" class="btn" download>Télécharger le Portfolio (PDF)</a>
-            </div>
         </div>
     </main>
 
@@ -42,5 +45,6 @@
         <p>&copy; 2025 Porteforlio de Maud Jeantet Roux. Tous droits réservés.</p>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>

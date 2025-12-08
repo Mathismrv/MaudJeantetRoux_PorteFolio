@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectGrid = document.getElementById('project-grid');
     const illustrationsGrid = document.getElementById('illustrations-grid');
     const croquisGrid = document.getElementById('croquis-grid');
+    const portfolioContainer = document.getElementById('portfolio-container');
 
     if (projectGrid) {
         loadProjects();
@@ -14,7 +15,35 @@ document.addEventListener('DOMContentLoaded', () => {
     if (croquisGrid) {
         loadCroquis();
     }
+
+    if (portfolioContainer) {
+        loadPortfolio();
+    }
 });
+
+async function loadPortfolio() {
+    try {
+        const response = await fetch('portfolio.json');
+        const images = await response.json();
+        const container = document.getElementById('portfolio-container');
+
+        images.forEach(imagePath => {
+            const img = document.createElement('img');
+            img.src = imagePath;
+            img.alt = "Page Portfolio";
+            img.style.width = "100%";
+            img.style.height = "auto";
+            img.style.display = "block";
+            img.style.marginBottom = "0"; // No gap between images
+            container.appendChild(img);
+        });
+
+    } catch (error) {
+        console.error('Error loading portfolio:', error);
+        const container = document.getElementById('portfolio-container');
+        container.innerHTML = '<p style="text-align:center;">Veuillez ajouter des images dans le dossier image/portfolio et lancer le script scan_illustrations.py</p>';
+    }
+}
 
 async function loadCroquis() {
     try {
