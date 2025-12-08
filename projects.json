@@ -9,10 +9,10 @@
     },
     {
         "id": "projet2",
-        "title": "Exemple Projet 2",
-        "folder": "projet2",
+        "title": "Grenouille",
+        "folder": "Grenouille",
         "cover": "cover.jpg",
-        "images": ["photo1.jpg"],
-        "youtube_id": ""
+        "images": ["1.png", "2.png","3.png","4.png", "5.png", "6.png"],
+        "youtube_id": "lKAJrijC5JQ"
     }
 ]
