@@ -827,3 +827,12 @@ footer {
     }
 }
 
+
+/* Croquis Grid Specific Style */
+.croquis-grid-style {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller cards */
+    max-width: 800px; /* Limit width to keep them centered/grouped */
+    margin-left: auto;
+    margin-right: auto;
+}
+

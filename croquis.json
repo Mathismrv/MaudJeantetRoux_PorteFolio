@@ -1,0 +1,18 @@
+[
+    {
+        "id": "croquis1",
+        "title": "Carnet de Croquis 1",
+        "folder": "croquis1",
+        "cover": "cover.jpg",
+        "images": ["scan1.jpg", "scan2.jpg"],
+        "youtube_id": ""
+    },
+    {
+        "id": "croquis2",
+        "title": "Recherches Personnages",
+        "folder": "croquis2",
+        "cover": "cover.jpg",
+        "images": ["char1.jpg", "char2.jpg"],
+        "youtube_id": ""
+    }
+]

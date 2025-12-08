@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const projectGrid = document.getElementById('project-grid');
     const illustrationsGrid = document.getElementById('illustrations-grid');
+    const croquisGrid = document.getElementById('croquis-grid');
 
     if (projectGrid) {
         loadProjects();
@@ -9,7 +10,44 @@ document.addEventListener('DOMContentLoaded', () => {
     if (illustrationsGrid) {
         loadIllustrations();
     }
+
+    if (croquisGrid) {
+        loadCroquis();
+    }
 });
+
+async function loadCroquis() {
+    try {
+        const response = await fetch('croquis.json');
+        const croquis = await response.json();
+        const grid = document.getElementById('croquis-grid');
+
+        for (const item of croquis) {
+            const card = document.createElement('div');
+            card.className = 'project-wrapper';
+            card.id = `card-croquis-${item.id}`;
+            
+            const coverPath = `image/${item.folder}/${item.cover || 'cover.jpg'}`;
+            
+            card.innerHTML = `
+                <h3 class="project-title-visible">${item.title}</h3>
+                <div class="project-card" onclick="openProjectModal('${item.id}')">
+                    <img src="${coverPath}" alt="${item.title}" onerror="this.src='image/placeholder.jpg'">
+                    <div class="project-info">
+                        <h3 class="project-title">Voir le carnet</h3>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+        
+        // Add croquis to global projectsData so modal works
+        window.projectsData = (window.projectsData || []).concat(croquis);
+
+    } catch (error) {
+        console.error('Error loading croquis:', error);
+    }
+}
 
 async function loadProjects() {
     try {

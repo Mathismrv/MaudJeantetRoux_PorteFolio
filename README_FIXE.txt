@@ -21,6 +21,12 @@ POUR AJOUTER UN PROJET :
    (Laissez "youtube_id" vide "" s'il n'y a pas de vidéo).
    NOTE : L'ordre des images dans la liste ["photo1.jpg", "photo2.jpg"] détermine l'ordre d'affichage sur le site.
 
+POUR AJOUTER UN CARNET DE CROQUIS (Page Illustrations) :
+C'est exactement comme pour un projet, mais dans le fichier "croquis.json".
+1. Créez un dossier dans "image/" (ex: "mon_carnet").
+2. Ajoutez vos scans et le fichier "description.txt".
+3. Ajoutez l'entrée dans "croquis.json".
+
 POUR AJOUTER UNE ILLUSTRATION :
 1. Ajoutez vos images dans le dossier "image/illustrations/".
 2. Double-cliquez sur le script "scan_illustrations.py".

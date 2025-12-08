@@ -23,6 +23,14 @@
 
     <main>
         <section class="hero">
+            <h1>Croquis</h1>
+        </section>
+
+        <div class="project-grid croquis-grid-style" id="croquis-grid">
+            <!-- Croquis Projects will be loaded here by JS -->
+        </div>
+
+        <section class="hero" style="margin-top: 4rem;">
             <h1>Illustrations</h1>
         </section>
 
@@ -30,7 +38,23 @@
             <!-- Gallery Images will be loaded here by JS -->
         </div>
 
-        <!-- Image Modal (Lightbox) -->
+        <!-- Project Modal (for Croquis) -->
+        <div id="projectModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <div id="modalBody" class="modal-body">
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox Modal (for Croquis details) -->
+        <div id="lightboxModal" class="modal" style="z-index: 3000; background-color: rgba(0,0,0,0.95);">
+            <span class="close-btn" onclick="closeLightbox()" style="position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; z-index: 3001;">&times;</span>
+            <img id="lightboxImage" style="margin: auto; display: block; max-width: 90%; max-height: 90vh; object-fit: contain;">
+        </div>
+
+        <!-- Image Modal (Lightbox for Illustrations) -->
         <div id="imageModal" class="modal">
             <span class="close-btn" onclick="closeImageModal()" style="position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; z-index: 2001;">&times;</span>
             
