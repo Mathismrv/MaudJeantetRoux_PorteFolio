@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le projet - Espace Propriétaire</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(19, 45, 86, 0.9), rgba(19, 45, 86, 0.9)), url('Image/robot.png');
+            background-size: cover;
+            background-attachment: fixed;
+            color: #f4f4f4;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border-radius: 10px;
+        }
+        h1, h2 {
+            color: #d4af37;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="file"], textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-family: inherit;
+        }
+        .media-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .media-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #d4af37;
+            color: #132d56;
+        }
+        .btn-primary:hover {
+            background-color: #f1c40f;
+        }
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            margin-right: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+        .delete-check {
+            color: #ff6b6b;
+            margin-top: 5px;
+            display: block;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modifier le projet</h1>
+        
+        <form action="{{ url_for('edit_project', id=project.id) }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Titre</label>
+                <input type="text" name="title" value="{{ project.title }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" rows="5">{{ project.description }}</textarea>
+            </div>
+
+            <h2>Médias existants</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem; color: #ccc;">Modifiez l'ordre ou cochez "Supprimer" pour retirer un média.</p>
+            
+            <div class="media-list">
+                {% for media in project.medias %}
+                <div class="media-item">
+                    {% if media.media_type == 'video' %}
+                        <video src="{{ media.url }}"></video>
+                    {% else %}
+                        <img src="{{ media.url }}">
+                    {% endif %}
+                    
+                    <div style="margin: 5px 0;">
+                        <label style="font-size: 0.8rem; display: inline;">Ordre:</label>
+                        <input type="number" name="media_order_{{ media.id }}" value="{{ media.order }}" style="width: 50px; padding: 2px; text-align: center;">
+                    </div>
+                    
+                    <label class="delete-check">
+                        <input type="checkbox" name="delete_media_{{ media.id }}"> Supprimer
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                <label>Ajouter de nouveaux médias (Images/Vidéos)</label>
+                <input type="file" name="new_images" accept="image/*,video/*" multiple>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Annuler</a>
+                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
