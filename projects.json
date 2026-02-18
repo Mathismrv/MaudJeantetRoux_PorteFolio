@@ -23,12 +23,21 @@
         "images": ["1.png", "2.png","3.png","4(1).png", "5.png", "6.png","7.png", "8.png", "9.png","10.png"],
         "youtube_id": ""
     },
-           {
+    {
         "id": "projet4",
         "title": "Stop Motion",
         "folder": "Stop_Motion",
         "cover": "titre_finale.png",
         "images": ["1.png", "2.png","3.jpg","4.jpg", "5.PNG", "6.PNG","7.PNG"],
         "youtube_id": "M_oCkA_kDuY"
+    },
+    {
+        "id": "projet5",
+        "title": "Lip-sync",
+        "folder": "Lip_sync",
+        "cover": "cover.jpg",
+        "images": [],
+        "youtube_ids": ["VIDEO_ID_1", "VIDEO_ID_2"],
+        "youtube_id": ""
     }
 ]
